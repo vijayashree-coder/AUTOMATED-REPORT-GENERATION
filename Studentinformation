@@ -1,0 +1,32 @@
+import csv
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+
+# Read data
+marks = []
+with open("students.csv", "r") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        marks.append(int(row["Marks"]))
+
+# Analysis
+total_students = len(marks)
+average = sum(marks) / total_students
+highest = max(marks)
+lowest = min(marks)
+pass_count = len([m for m in marks if m >= 50])
+fail_count = total_students - pass_count
+
+# Create PDF
+pdf = canvas.Canvas("Student_Report.pdf", pagesize=A4)
+pdf.setFont("Helvetica", 12)
+
+pdf.drawString(50, 800, "AUTOMATED STUDENT PERFORMANCE REPORT")
+pdf.drawString(50, 760, f"Total Students: {total_students}")
+pdf.drawString(50, 740, f"Average Marks: {average:.2f}")
+pdf.drawString(50, 720, f"Highest Marks: {highest}")
+pdf.drawString(50, 700, f"Lowest Marks: {lowest}")
+pdf.drawString(50, 680, f"Pass Count: {pass_count}")
+pdf.drawString(50, 660, f"Fail Count: {fail_count}")
+
+pdf.save()
