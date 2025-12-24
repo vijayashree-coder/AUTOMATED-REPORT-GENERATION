@@ -1,6 +1,6 @@
 # AUTOMATED-REPORT-GENERATION
 
-##
+## Student Performance Report Automation System
 
 __Company Name__ : Codtech IT Solutions Private Limited
 
